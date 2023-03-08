@@ -1,7 +1,7 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+
 public class Library {
 
 
@@ -27,6 +27,8 @@ public class Library {
 
 //============================================================================
 
+
+
     public Library()
     {
 //        Librarian first = new Librarian("driver" , "12345");
@@ -39,15 +41,19 @@ public class Library {
         try
         {
             FileWriter books = new FileWriter("bookFile" , true);
+
         }
         catch (IOException e)
         {
             throw new RuntimeException(e);
         }
+
         //TODO
 
 
     }
+
+
 
     //==================================================================
 
@@ -68,7 +74,7 @@ public class Library {
     //======================================================================
 
     public void doesBookExist(){
-        //TODO
+
     }
 
     //===============================================================
@@ -119,8 +125,9 @@ public class Library {
 
     //==============================================================
 
-    public void doesUserExist(){
+    public boolean doesUserExist(){
         //TODO
+        return true;
     }
 
     //======================================================
@@ -160,8 +167,9 @@ public class Library {
 
     //===================================================================
 
-    public void doesLibrarianExist(){
+    public boolean doesLibrarianExist(){
         //TODO
+        return true;
     }
 
     //===================================================================

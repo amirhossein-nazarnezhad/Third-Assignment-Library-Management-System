@@ -36,7 +36,13 @@ public class Main
 
         //-------------------------------------------------------------------
 
-        runMenu(user ,librarian , library , book);
+        //set first librarian
+        librarian.setUserName("driver");
+        librarian.setPassword("12345");
+
+        //==================================================================
+
+        runMenu(user ,librarian , library , book); //start :)
     }
 
 
@@ -50,7 +56,7 @@ public class Main
 
         if(answer.equalsIgnoreCase("sign up"))
         {
-             signUp(user);
+             signUp(user , library);
         }
 
         else if(answer.equalsIgnoreCase("log in"))
@@ -70,33 +76,43 @@ public class Main
 
     //==============================================================================
 
-    public static void signUp(User user)
+    public static void signUp(User user , Library library)
     {
         Scanner input =  new Scanner(System.in);
 
         System.out.println("please enter userName : ");
         String userName = input.nextLine();
 
-        // doesUserExist():
-        //sout("This userName already exists please enter another userName")
-
-        //if not exist:
-        System.out.println("please enter password");
-        String password = input.nextLine();
-        System.out.println("please Confirm your password ");
-        String confirmPassword = input.nextLine();
-        if(password.equals(confirmPassword))
+        if(library.doesUserExist())
         {
-            System.out.println("welcome to this library " + userName);
-            //adduser();
-
-            runMenuUser(userName , password , user);
+            System.out.println("This userName already exists please enter another userName");
         }
+
 
         else
         {
-            System.out.println("please try again and Confirm your password correctly");
-            signUp(user);
+            System.out.println("please enter password");
+            String password = input.nextLine();
+            System.out.println("please Confirm your password ");
+            String confirmPassword = input.nextLine();
+            if(password.equals(confirmPassword))
+            {
+                System.out.println("welcome to this library " + userName);
+
+                user.setUserName(userName);
+                user.setPassword(password);
+
+                library.addUser(user);
+
+                runMenuUser(userName , password , user);
+            }
+
+            else
+            {
+                System.out.println("please try again and Confirm your password correctly");
+                signUp(user , library);
+            }
+
         }
 
     }
@@ -116,30 +132,35 @@ public class Main
                 String userName = input.nextLine();
                 System.out.println("please enter your password");
                 String password = input.nextLine();
-               // doesUserExist()
-               // if exist :
-            runMenuUser(userName , password , user);
 
-              //  if not exist :
+              if (library.doesUserExist())
+              {
+                  runMenuUser(userName , password , user);
+              }
 
-                System.out.println("This user does not exist, please try again" + "sign up or log in?");
-                String answer  = input.nextLine();
 
-            if(answer.equalsIgnoreCase("sign up"))
-            {
-                signUp(user);
-            }
 
-            else if(answer.equalsIgnoreCase("log in"))
-            {
-                logIn(user  ,librarian , library , book);
-            }
+              else
+              {
+                  System.out.println("This user does not exist, please try again." + " sign up or log in?");
+                  String answer  = input.nextLine();
 
-            else
-            {
-                System.out.println("You entered an expression that is not according to our request, so we will automatically do it again log in");
-                logIn(user , librarian , library , book);
-            }
+                    if(answer.equalsIgnoreCase("sign up"))
+                    {
+                        signUp(user , library);
+                    }
+
+                    else if(answer.equalsIgnoreCase("log in"))
+                    {
+                        logIn(user  ,librarian , library , book);
+                    }
+
+                    else
+                    {
+                        System.out.println("You entered an expression that is not according to our request, so we will automatically do it again log in");
+                        logIn(user , librarian , library , book);
+                    }
+              }
 
         }
 
@@ -150,29 +171,33 @@ public class Main
             String userName = input.nextLine();
             System.out.println("please enter your password");
             String password = input.nextLine();
-//            doeslibrarianExist()
 
-//            if exist :
-            runMenuLibrarian(book , library , user);
 
-//            if not exist :
-            System.out.println("This user does not exist, please try again" + "sign up or log in?");
-            String answer  = input.nextLine();
-
-            if(answer.equalsIgnoreCase("sign up"))
-            {
-                signUp(user);
-            }
-
-            else if(answer.equalsIgnoreCase("log in"))
-            {
-                logIn(user , librarian , library , book);
-            }
+            if(library.doesLibrarianExist())
+            runMenuLibrarian(book , library , user , librarian);
 
             else
             {
-                System.out.println("You entered an expression that is not according to our request, so we will automatically do it again log in");
-                logIn(user , librarian , library , book);
+
+
+                System.out.println("This user does not exist, please try again" + "sign up or log in?");
+                String answer  = input.nextLine();
+
+                if(answer.equalsIgnoreCase("sign up"))
+                {
+                    signUp(user , library);
+                }
+
+                else if(answer.equalsIgnoreCase("log in"))
+                {
+                    logIn(user , librarian , library , book);
+                }
+
+                else
+                {
+                    System.out.println("You entered an expression that is not according to our request, so we will automatically do it again log in");
+                    logIn(user , librarian , library , book);
+                }
             }
 
         }
@@ -217,7 +242,7 @@ public class Main
     }
 
     //===============================================================
-    public static void runMenuLibrarian(Book book ,Library library , User user)
+    public static void runMenuLibrarian(Book book ,Library library , User user , Librarian librarian)
     {
 
         System.out.println("do you want search or changing user or changing book or changing librarian?  search/changing user/changing book/changing librarian");
@@ -247,7 +272,7 @@ public class Main
             else
             {
                 System.out.println("please enter valid input and try again");
-                runMenuLibrarian(book , library , user);
+                runMenuLibrarian(book , library , user , librarian);
 
             }
         }
@@ -275,7 +300,7 @@ public class Main
             else
             {
                 System.out.println("please enter valid input and try again");
-                runMenuLibrarian(book , library ,user );
+                runMenuLibrarian(book , library ,user , librarian );
 
             }
 
@@ -305,7 +330,7 @@ public class Main
             else
             {
                 System.out.println("please enter valid input and try again");
-                runMenuLibrarian(book , library , user);
+                runMenuLibrarian(book , library , user , librarian);
 
             }
 
@@ -318,23 +343,23 @@ public class Main
 
             if(answer3.equalsIgnoreCase("add"))
             {
-                //addLibrarian();
+                library.addLibrarian(librarian);
             }
 
             else if(answer3.equalsIgnoreCase("remove"))
             {
-                //removelibrarian();
+                library.removeLibrarian();
             }
 
             else if(answer3.equalsIgnoreCase("update"))
             {
-                //updatelibrarian();
+                library.updateLibrarian();
             }
 
             else
             {
                 System.out.println("please enter valid input and try again");
-                runMenuLibrarian(book , library , user);
+                runMenuLibrarian(book , library , user , librarian);
 
             }
 
