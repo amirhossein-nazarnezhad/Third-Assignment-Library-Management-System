@@ -83,7 +83,7 @@ public class Main
         System.out.println("please enter userName : ");
         String userName = input.nextLine();
 
-        if(library.doesUserExist())
+        if(library.doesUserExist(user))
         {
             System.out.println("This userName already exists please enter another userName");
         }
@@ -134,7 +134,7 @@ public class Main
                 System.out.println("please enter your password");
                 String password = input.nextLine();
 
-              if (library.doesUserExist())
+              if (library.doesUserExist(user))
               {
                   runMenuUser(userName , password , user , librarian , library , book);
               }
@@ -174,7 +174,7 @@ public class Main
             String password = input.nextLine();
 
 
-            if(library.doesLibrarianExist())
+            if(library.doesLibrarianExist(librarian))
             runMenuLibrarian(book , library , user , librarian);
 
             else

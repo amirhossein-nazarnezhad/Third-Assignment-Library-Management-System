@@ -1,6 +1,4 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.util.ArrayList;
 
 public class Library {
 
@@ -18,35 +16,46 @@ public class Library {
 
     //file text
 //===================================================================
+//
+//    String address = "C:\\Users\\ASUS\\Desktop\\java code\\Third-assignment.txt";
+//    File userFile = new File("address");
+//    File librarianFile = new File("address");
+//    File bookFile = new File("address");
 
-    String address = "C:\\Users\\ASUS\\Desktop\\java code\\Third-assignment.txt";
-    File userFile = new File("address");
-    File librarianFile = new File("address");
-    File bookFile = new File("address");
 
 
+        //array list
 //============================================================================
+         ArrayList<Book> books = new ArrayList<Book>();
+         ArrayList<Librarian> librarians = new ArrayList<Librarian>();
+         ArrayList<User> users = new ArrayList<User>();
+
+
+//===============================================================================
 
 
 
     public Library()
     {
-//        Librarian first = new Librarian("driver" , "12345");
-//        librarians.add(first);
+       Librarian first = new Librarian("driver" , "12345");
+       librarians.add(first);
     }
 
 
     //==========================================================================
     public void addBook(Book book){
-        try
-        {
-            FileWriter books = new FileWriter("bookFile" , true);
+//        try
+//        {
+//            FileWriter books = new FileWriter("bookFile" , true);
+//
+//        }
+//        catch (IOException e)
+//        {
+//            throw new RuntimeException(e);
+//        }
 
-        }
-        catch (IOException e)
-        {
-            throw new RuntimeException(e);
-        }
+
+        books.add(book);
 
         //TODO
 
@@ -94,15 +103,17 @@ public class Library {
     //user related functions
 
     public void addUser(User user){
+//
+//        try
+//        {
+//            FileWriter users = new FileWriter("userFile" , true);
+//        }
+//        catch (IOException e)
+//        {
+//            throw new RuntimeException(e);
+//        }
 
-        try
-        {
-            FileWriter users = new FileWriter("userFile" , true);
-        }
-        catch (IOException e)
-        {
-            throw new RuntimeException(e);
-        }
+        users.add(user);
 
     }
 
@@ -125,9 +136,22 @@ public class Library {
 
     //==============================================================
 
-    public boolean doesUserExist(){
+    public boolean doesUserExist(User user){
         //TODO
-        return true;
+        for (int i=0 ; i< users.size() ; i++)
+        {
+            if(user.equals(users))
+            {
+                return true;
+
+            }
+            else
+            {
+                return false;
+            }
+        }
+       return false;
+
     }
 
     //======================================================
@@ -136,14 +160,15 @@ public class Library {
 
     public void addLibrarian(Librarian librarian){
 
-        try
-        {
-            FileWriter librarians = new FileWriter("librarianFile" , true);
-        }
-        catch (IOException e)
-        {
-            throw new RuntimeException(e);
-        }
+//        try
+//        {
+//            FileWriter librarians = new FileWriter("librarianFile" , true);
+//        }
+//        catch (IOException e)
+//        {
+//            throw new RuntimeException(e);
+//        }
+        librarians.add(librarian);
 
     }
 
@@ -167,7 +192,7 @@ public class Library {
 
     //===================================================================
 
-    public boolean doesLibrarianExist(){
+    public boolean doesLibrarianExist(Librarian librarian){
         //TODO
         return true;
     }
