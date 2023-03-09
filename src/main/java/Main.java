@@ -218,7 +218,7 @@ public class Main
     {
         System.out.println("Do you want rent or return book? rent/return/log out");
         Scanner input =  new Scanner(System.in);
-        String answer = input.next();
+        String answer = input.nextLine();
 
         if(answer.equalsIgnoreCase("rent"))
         {
@@ -254,12 +254,12 @@ public class Main
         System.out.println("do you want search or changing user or changing book or changing librarian?  search/changing user/changing book/changing librarian/log out");
 
         Scanner input = new Scanner(System.in);
-        String answer = input.next();
+        String answer = input.nextLine();
 
         if(answer.equalsIgnoreCase("search"))
         {
             System.out.println("Do you want search to users or books or librarian?  users/books/librarian/log out");
-            String answer2 = input.next();
+            String answer2 = input.nextLine();
             if(answer2.equalsIgnoreCase("users"))
             {
                 library.searchUser();
@@ -291,7 +291,7 @@ public class Main
         else if(answer.equalsIgnoreCase("changing user"))
         {
             System.out.println("Do you want add or remove or update users? add/remove/update/log out");
-            String answer3 = input.next();
+            String answer3 = input.nextLine();
 
             if(answer3.equalsIgnoreCase("add"))
             {
@@ -325,7 +325,7 @@ public class Main
         else if(answer.equalsIgnoreCase("changing book"))
         {
             System.out.println("Do you want add or remove or update books? add/remove/update/log out");
-            String answer3 = input.next();
+            String answer3 = input.nextLine();
 
             if(answer3.equalsIgnoreCase("add"))
             {
@@ -360,7 +360,7 @@ public class Main
         else if(answer.equalsIgnoreCase("changing librarian"))
         {
             System.out.println("Do you want add or remove or update librarian? add/remove/update/log out");
-            String answer3 = input.next();
+            String answer3 = input.nextLine();
 
             if(answer3.equalsIgnoreCase("add"))
             {
