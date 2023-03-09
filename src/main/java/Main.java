@@ -56,7 +56,7 @@ public class Main
 
         if(answer.equalsIgnoreCase("sign up"))
         {
-             signUp(user , library);
+             signUp(user , library , librarian , book);
         }
 
         else if(answer.equalsIgnoreCase("log in"))
@@ -76,7 +76,7 @@ public class Main
 
     //==============================================================================
 
-    public static void signUp(User user , Library library)
+    public static void signUp(User user , Library library , Librarian librarian , Book book)
     {
         Scanner input =  new Scanner(System.in);
 
@@ -104,13 +104,14 @@ public class Main
 
                 library.addUser(user);
 
-                runMenuUser(userName , password , user);
+
+                runMenuUser(userName , password , user ,librarian ,library , book );
             }
 
             else
             {
                 System.out.println("please try again and Confirm your password correctly");
-                signUp(user , library);
+                signUp(user , library , librarian , book);
             }
 
         }
@@ -135,7 +136,7 @@ public class Main
 
               if (library.doesUserExist())
               {
-                  runMenuUser(userName , password , user);
+                  runMenuUser(userName , password , user , librarian , library , book);
               }
 
 
@@ -147,7 +148,7 @@ public class Main
 
                     if(answer.equalsIgnoreCase("sign up"))
                     {
-                        signUp(user , library);
+                        signUp(user , library , librarian , book);
                     }
 
                     else if(answer.equalsIgnoreCase("log in"))
@@ -185,7 +186,7 @@ public class Main
 
                 if(answer.equalsIgnoreCase("sign up"))
                 {
-                    signUp(user , library);
+                    signUp(user , library , librarian , book);
                 }
 
                 else if(answer.equalsIgnoreCase("log in"))
@@ -213,9 +214,9 @@ public class Main
     }
 
     //===============================================================
-    public static void runMenuUser(String username , String password , User user)
+    public static void runMenuUser(String username , String password , User user , Librarian librarian , Library library , Book book)
     {
-        System.out.println("Do you want rent or return book? rent/return");
+        System.out.println("Do you want rent or return book? rent/return/log out");
         Scanner input =  new Scanner(System.in);
         String answer = input.next();
 
@@ -231,10 +232,15 @@ public class Main
             user.returnBook();
         }
 
+        else if(answer.equalsIgnoreCase("log out"))
+        {
+            runMenu(user , librarian , library , book);
+        }
+
         else
         {
             System.out.println("please enter valid input");
-            runMenuUser(username , password , user);
+            runMenuUser(username , password , user , librarian , library , book);
         }
 
 
@@ -245,14 +251,14 @@ public class Main
     public static void runMenuLibrarian(Book book ,Library library , User user , Librarian librarian)
     {
 
-        System.out.println("do you want search or changing user or changing book or changing librarian?  search/changing user/changing book/changing librarian");
+        System.out.println("do you want search or changing user or changing book or changing librarian?  search/changing user/changing book/changing librarian/log out");
 
         Scanner input = new Scanner(System.in);
         String answer = input.next();
 
         if(answer.equalsIgnoreCase("search"))
         {
-            System.out.println("Do you want search to users or books or librarian?  users/books/librarian");
+            System.out.println("Do you want search to users or books or librarian?  users/books/librarian/log out");
             String answer2 = input.next();
             if(answer2.equalsIgnoreCase("users"))
             {
@@ -269,6 +275,11 @@ public class Main
                library.searchLibrarian();
             }
 
+            else if(answer2.equalsIgnoreCase("log out"))
+            {
+                runMenu(user , librarian , library , book);
+            }
+
             else
             {
                 System.out.println("please enter valid input and try again");
@@ -279,7 +290,7 @@ public class Main
 
         else if(answer.equalsIgnoreCase("changing user"))
         {
-            System.out.println("Do you want add or remove or update users? add/remove/update");
+            System.out.println("Do you want add or remove or update users? add/remove/update/log out");
             String answer3 = input.next();
 
             if(answer3.equalsIgnoreCase("add"))
@@ -297,6 +308,11 @@ public class Main
                 library.updateUser();
             }
 
+            else if(answer3.equalsIgnoreCase("log out"))
+            {
+                runMenu(user , librarian , library , book);
+            }
+
             else
             {
                 System.out.println("please enter valid input and try again");
@@ -308,7 +324,7 @@ public class Main
 
         else if(answer.equalsIgnoreCase("changing book"))
         {
-            System.out.println("Do you want add or remove or update books? add/remove/update");
+            System.out.println("Do you want add or remove or update books? add/remove/update/log out");
             String answer3 = input.next();
 
             if(answer3.equalsIgnoreCase("add"))
@@ -327,6 +343,11 @@ public class Main
                 library.updateBook();
             }
 
+            else if(answer3.equalsIgnoreCase("log out"))
+            {
+                runMenu(user , librarian , library , book);
+            }
+
             else
             {
                 System.out.println("please enter valid input and try again");
@@ -338,7 +359,7 @@ public class Main
 
         else if(answer.equalsIgnoreCase("changing librarian"))
         {
-            System.out.println("Do you want add or remove or update librarian? add/remove/update");
+            System.out.println("Do you want add or remove or update librarian? add/remove/update/log out");
             String answer3 = input.next();
 
             if(answer3.equalsIgnoreCase("add"))
@@ -356,6 +377,11 @@ public class Main
                 library.updateLibrarian();
             }
 
+            else if(answer3.equalsIgnoreCase("log out"))
+            {
+                runMenu(user , librarian , library , book);
+            }
+
             else
             {
                 System.out.println("please enter valid input and try again");
@@ -363,6 +389,20 @@ public class Main
 
             }
 
+
+
+        }
+
+
+        else if(answer.equalsIgnoreCase("log out"))
+        {
+            runMenu(user , librarian , library , book);
+        }
+
+        else
+        {
+            System.out.println("please enter valid input and try again");
+            runMenuLibrarian(book , library , user , librarian);
         }
     }
 
